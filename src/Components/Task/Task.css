@@ -1,0 +1,30 @@
+.tooDoo-task {
+  font-size: 1.3rem;
+  font-style: italic;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.completed {
+  text-decoration: line-through;
+  transition: all 1s;
+  color: green;
+}
+.task {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.deleted {
+  position: relative;
+  opacity: 0;
+  animation: move 1s linear;
+}
+
+@keyframes move {
+  from {
+    left: 0;
+  }
+  to {
+    left: 300px;
+  }
+}

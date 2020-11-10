@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+* {
+  font-size: 10px;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+p {
+  line-height: 2.5rem;
+}
+button {
+  padding: 0.5rem;
+}
+input {
+  padding: 0.5rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.tooDoo {
+  width: 500px;
+  min-height: 350px;
+  background: linear-gradient(15deg, #ffffff9d 10%, #54c1f7 45%);
+  padding: 20px;
+  border: rgb(222, 238, 237) 3px solid;
+  margin: 0 auto;
+  box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 10px 10px 44px 10px;
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 10rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes box {
   from {
-    transform: rotate(0deg);
+    top: -1rem;
   }
   to {
-    transform: rotate(360deg);
+    top: 0;
   }
+}
+.tooDoo-day {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+}
+.tooDoo-day :nth-child(1) {
+  color: rgb(29, 29, 28);
+  font-size: 1.6rem;
+  font-style: oblique;
+}
+.tooDoo-day :nth-child(2) {
+  margin-left: 5px;
+  font-size: 1.2rem;
+}
+.tooDoo-empty {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 2rem;
+  text-decoration: underline;
+}
+
+.tooDoo-line {
+  margin-bottom: 2rem;
 }
