@@ -19,6 +19,20 @@
   opacity: 0;
   animation: move 1s linear;
 }
+.delete-icon {
+}
+.delete-icon:hover {
+  color: red;
+  animation: rotate linear infinite 4s;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 @keyframes move {
   from {
@@ -26,5 +40,6 @@
   }
   to {
     left: 300px;
+    color: red;
   }
 }

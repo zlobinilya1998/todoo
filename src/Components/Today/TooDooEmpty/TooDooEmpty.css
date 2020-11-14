@@ -1,0 +1,15 @@
+.tooDoo-empty {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 2rem;
+  text-decoration: underline;
+  animation: empty-animation 1s ease-in;
+}
+@keyframes empty-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

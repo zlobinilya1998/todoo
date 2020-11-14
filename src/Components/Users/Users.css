@@ -1,0 +1,6 @@
+.users-blog {
+  max-width: 250px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+}

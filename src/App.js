@@ -1,28 +1,16 @@
 import { useState } from "react";
-import Task from "./Components/Task/Task";
-import "./App.css";
-import Tasker from "./Components/Tasker/tasker";
-import { Alert } from "@material-ui/lab";
-import { makeStyles } from "@material-ui/core/styles";
-import Collapse from "@material-ui/core/Collapse";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "30%",
-    "& > * + *": {
-      marginTop: theme.spacing(1),
-      marginLeft: 50 + "%",
-    },
-  },
-}));
+import Task from "./Components/Task/Task";
+import Tasker from "./Components/Tasker/tasker";
+import AlertWindow from "./Components/AlertWindow/AlertWindow";
+import Today from "./Components/Today/Today";
+import TooDooEmpty from "./Components/Today/TooDooEmpty/TooDooEmpty";
+
+import "./App.css";
 
 function App() {
-  const classes = useStyles();
-  const [error, SetError] = useState([`Ошибка`]);
   const [open, setOpen] = useState(false);
-
+  const [error, setError] = useState(["Ошибка"]);
   const [tasks, setTasks] = useState([
     {
       text: "Привести делать в порядок",
@@ -92,23 +80,17 @@ function App() {
     );
   };
 
-  const openHandler = (completed) => {
-    setOpen(true);
-    SetError(
-      completed
-        ? "Выполненное задание удалено!"
-        : "Удалено невыполненное задание!"
-    );
-    setTimeout(() => setOpen(false), 2000);
-  };
-
   const removeTask = (index, deleted) => {
     deleted = !deleted;
     setTasks((prevTasks) =>
       prevTasks.filter((task, curIndx) => curIndx !== index)
     );
   };
-
+  const errorText = (text) => {
+    setOpen(true);
+    setError(text);
+    setTimeout(() => setOpen(false), 2000);
+  };
   const onAddTask = (text) => {
     if (text.length < 45 && text.length !== 0 && text.length > 5) {
       setTasks((prevTasks) => [
@@ -119,56 +101,19 @@ function App() {
         },
       ]);
     } else if (text.length === 0) {
-      setOpen(true);
-      SetError("Строка не может быть пустой!");
-      setTimeout(() => setOpen(false), 2000);
+      errorText("Строка не может быть пустой");
     } else if (text.length > 45) {
-      setOpen(true);
-      SetError("Строка слишком длинная!");
-      setTimeout(() => setOpen(false), 2000);
+      errorText("Строка слишком длинная!");
     } else if (text.length < 5) {
-      setOpen(true);
-      SetError("Строка слишком короткая!");
-      setTimeout(() => setOpen(false), 2000);
+      errorText("Строка слишком короткая!");
     }
   };
 
   return (
     <>
-      <div className={classes.root}>
-        <Collapse in={open}>
-          <Alert
-            severity="error"
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-          >
-            {error}
-          </Alert>
-        </Collapse>
-      </div>
-
+      <AlertWindow setOpen={() => setOpen()} error={error} open={open} />
       <div className="tooDoo">
-        <div className="tooDoo-day">
-          <strong>Сегодня </strong>
-          <p>
-            {new Date().toLocaleDateString([], {
-              weekday: "short",
-              day: "numeric",
-              month: "short",
-            })}
-          </p>
-        </div>
-
+        <Today />
         <Tasker onAddTask={onAddTask} />
 
         {tasks.map((task, index) => (
@@ -182,13 +127,10 @@ function App() {
             toggleCompleted={toggleCompleted}
             toggleDeleteted={toggleDeleted}
             removeTask={removeTask}
-            openHandler={openHandler}
           />
         ))}
 
-        {tasks.length === 0 ? (
-          <p className="tooDoo-empty">Ваш список задач пуст!</p>
-        ) : null}
+        <TooDooEmpty tasks={tasks} />
       </div>
     </>
   );

@@ -1,25 +1,8 @@
-* {
-  font-size: 10px;
-  padding: 0;
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-p {
-  line-height: 2.5rem;
-}
-button {
-  padding: 0.5rem;
-}
-input {
-  padding: 0.5rem;
-}
-
 .tooDoo {
   width: 500px;
   min-height: 350px;
-  background: linear-gradient(15deg, #ffffff9d 10%, #54c1f7 45%);
+  background: linear-gradient(15deg, #ffffff9d 10%, #93d8fa 45%);
   padding: 20px;
-  border: rgb(222, 238, 237) 3px solid;
   margin: 0 auto;
   box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.75);
   border-radius: 10px 10px 44px 10px;
@@ -28,35 +11,6 @@ input {
   right: 1rem;
   top: 10rem;
 }
-@keyframes box {
-  from {
-    top: -1rem;
-  }
-  to {
-    top: 0;
-  }
-}
-.tooDoo-day {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 2rem;
-}
-.tooDoo-day :nth-child(1) {
-  color: rgb(29, 29, 28);
-  font-size: 1.6rem;
-  font-style: oblique;
-}
-.tooDoo-day :nth-child(2) {
-  margin-left: 5px;
-  font-size: 1.2rem;
-}
-.tooDoo-empty {
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 2rem;
-  text-decoration: underline;
-}
-
 .tooDoo-line {
   margin-bottom: 2rem;
 }

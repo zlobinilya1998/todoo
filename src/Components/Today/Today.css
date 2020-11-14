@@ -1,0 +1,14 @@
+.tooDoo-day {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+}
+.tooDoo-day :nth-child(1) {
+  color: rgb(29, 29, 28);
+  font-size: 1.6rem;
+  font-style: oblique;
+}
+.tooDoo-day :nth-child(2) {
+  margin-left: 5px;
+  font-size: 1.2rem;
+}
