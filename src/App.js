@@ -6,9 +6,10 @@ import AlertWindow from "./Components/AlertWindow/AlertWindow";
 import Today from "./Components/Today/Today";
 import TooDooEmpty from "./Components/Today/TooDooEmpty/TooDooEmpty";
 
-import "./App.css";
+import classes from "./App.module.css";
 
 function App() {
+  console.log(classes);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(["Ошибка"]);
   const [tasks, setTasks] = useState([
@@ -112,7 +113,7 @@ function App() {
   return (
     <>
       <AlertWindow setOpen={() => setOpen()} error={error} open={open} />
-      <div className="tooDoo">
+      <div className={classes.tooDoo}>
         <Today />
         <Tasker onAddTask={onAddTask} />
 

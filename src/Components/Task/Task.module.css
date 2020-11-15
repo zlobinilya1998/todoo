@@ -1,4 +1,4 @@
-.tooDoo-task {
+.tooDooTask {
   font-size: 1.3rem;
   font-style: italic;
   transition: all 0.5s;
@@ -19,9 +19,7 @@
   opacity: 0;
   animation: move 1s linear;
 }
-.delete-icon {
-}
-.delete-icon:hover {
+.deleteIcon:hover {
   color: red;
   animation: rotate linear infinite 4s;
 }

@@ -1,7 +1,8 @@
-import "./tasker.css";
 import { Button, Input } from "@material-ui/core";
 import { React, useState, useEffect } from "react";
 import PostAddIcon from "@material-ui/icons/PostAdd";
+
+import classes from "./tasker.module.css";
 
 export default function Tasker({ onAddTask }) {
   const [text, SetText] = useState("");
@@ -24,15 +25,18 @@ export default function Tasker({ onAddTask }) {
 
   return (
     <>
-      <div className="input-field">
+      <div className={classes.inputField}>
         <Input
           value={text}
-          className="tooDoo-input"
+          className={classes.tooDooInput}
           placeholder="Введите название новой задачи"
           onChange={handleClick}
           onKeyUp={handleKey}
         ></Input>
-        <Button className="tooDoo-input-button" onClick={() => addTask(text)}>
+        <Button
+          className={classes.tooDooInputButton}
+          onClick={() => addTask(text)}
+        >
           <PostAddIcon>Добавить</PostAddIcon>
         </Button>
       </div>

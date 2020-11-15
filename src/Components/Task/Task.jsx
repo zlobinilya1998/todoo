@@ -1,5 +1,5 @@
-import "../Task/Task.css";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import classes from "../Task/Task.module.css";
 
 export default function Task({
   text,
@@ -12,18 +12,18 @@ export default function Task({
   taskOpen,
 }) {
   return (
-    <div className="task" draggable="true">
+    <div className={classes.task} draggable="true">
       <p
         onClick={() => toggleCompleted(index)}
-        className={`tooDoo-task ${completed ? "completed" : null} ${
-          deleted ? "deleted" : null
-        }`}
+        className={`${classes.tooDooTask} ${
+          completed ? classes.completed : null
+        } ${deleted ? classes.deleted : null}`}
       >
         #{index + 1} {text}
       </p>
-      <div className={deleted ? "deleted" : null}>
+      <div className={deleted ? classes.deleted : null}>
         <HighlightOffIcon
-          className="delete-icon"
+          className={classes.deleteIcon}
           variant="outlined"
           onClick={() => {
             taskOpen(index);
