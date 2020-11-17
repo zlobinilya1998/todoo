@@ -1,5 +1,5 @@
 import "./User.css";
-export default function User({ id, realName, name, email, address, company }) {
+export default function User({ realName, name, email, address, company }) {
   return (
     <div className="user-card">
       <h2 className="user-realName">{realName}</h2>

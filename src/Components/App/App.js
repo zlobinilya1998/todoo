@@ -1,43 +1,19 @@
 import { useState } from "react";
 
-import Task from "./Components/Task/Task";
-import Tasker from "./Components/Tasker/tasker";
-import AlertWindow from "./Components/AlertWindow/AlertWindow";
-import Today from "./Components/Today/Today";
-import TooDooEmpty from "./Components/Today/TooDooEmpty/TooDooEmpty";
+import {
+  Task,
+  Tasker,
+  AlertWindow,
+  Today,
+  TooDooEmpty,
+} from "../../ComponentsStore";
 
 import classes from "./App.module.css";
 
 function App({ questions }) {
-  console.log(classes);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(["Ошибка"]);
-  const [tasks, setTasks] = useState([
-    {
-      text: "Привести делать в порядок",
-      completed: false,
-      deleted: false,
-      taskOpen: true,
-    },
-    {
-      text: "Начать новую жизнь",
-      completed: false,
-      deleted: false,
-      taskOpen: true,
-    },
-    {
-      text: "Построить дом",
-      completed: false,
-      deleted: false,
-      taskOpen: true,
-    },
-    {
-      text: "Посмотреть метод",
-      completed: false,
-      deleted: false,
-      taskOpen: true,
-    },
-  ]);
+  const [tasks, setTasks] = useState(questions);
 
   const taskOpen = (index) => {
     setTasks((prevTasks) =>
@@ -94,13 +70,18 @@ function App({ questions }) {
   };
   const onAddTask = (text) => {
     if (text.length < 45 && text.length !== 0 && text.length > 5) {
-      setTasks((prevTasks) => [
-        ...prevTasks,
-        {
-          text: text[0].toUpperCase() + text.slice(1),
-          completed: false,
-        },
-      ]);
+      setTasks((prevTasks) => {
+        console.log(tasks);
+        return [
+          ...prevTasks,
+          {
+            text: text[0].toUpperCase() + text.slice(1),
+            completed: false,
+            deleted: false,
+            taskOpen: true,
+          },
+        ];
+      });
     } else if (text.length === 0) {
       errorText("Строка не может быть пустой");
     } else if (text.length > 45) {
@@ -112,27 +93,31 @@ function App({ questions }) {
 
   return (
     <>
+      {tasks === 0 ? (
+        <p>Loading</p>
+      ) : (
+        <div className={classes.tooDoo}>
+          <Today />
+          <Tasker onAddTask={onAddTask} />
+
+          {tasks.map((task, index) => (
+            <Task
+              key={index}
+              index={index}
+              text={task.text}
+              completed={task.completed}
+              deleted={task.deleted}
+              taskOpen={taskOpen}
+              toggleCompleted={toggleCompleted}
+              toggleDeleteted={toggleDeleted}
+              removeTask={removeTask}
+            />
+          ))}
+
+          <TooDooEmpty tasks={tasks} />
+        </div>
+      )}
       <AlertWindow setOpen={() => setOpen()} error={error} open={open} />
-      <div className={classes.tooDoo}>
-        <Today />
-        <Tasker onAddTask={onAddTask} />
-
-        {tasks.map((task, index) => (
-          <Task
-            key={index}
-            index={index}
-            text={task.text}
-            completed={task.completed}
-            deleted={task.deleted}
-            taskOpen={taskOpen}
-            toggleCompleted={toggleCompleted}
-            toggleDeleteted={toggleDeleted}
-            removeTask={removeTask}
-          />
-        ))}
-
-        <TooDooEmpty tasks={tasks} />
-      </div>
     </>
   );
 }
