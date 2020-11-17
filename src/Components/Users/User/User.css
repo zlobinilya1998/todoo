@@ -6,13 +6,22 @@
   justify-content: center;
   padding: 10px;
   background: rgb(240, 237, 237);
+  position: relative;
+  transition: all 0.7s ease-out;
+  cursor: pointer;
 }
+.user-card:hover {
+  transform: translate(0, -2rem);
+  opacity: 0.9;
+}
+
 .user-card:nth-child(2n + 1) {
   border: 2px #5ff3d3 solid;
 }
 .user-realName {
   margin: 10px auto;
   font-size: medium;
+  text-align: center;
 }
 .user-realName:nth-child(n3 + 1) .user-name span {
   color: rgb(122, 121, 121);

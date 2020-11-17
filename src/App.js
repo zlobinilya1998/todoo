@@ -8,7 +8,7 @@ import TooDooEmpty from "./Components/Today/TooDooEmpty/TooDooEmpty";
 
 import classes from "./App.module.css";
 
-function App() {
+function App({ questions }) {
   console.log(classes);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(["Ошибка"]);

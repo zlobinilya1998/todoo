@@ -4,6 +4,9 @@
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
+.active {
+  color: rgb(0, 255, 106);
+}
 p {
   line-height: 2.5rem;
 }
@@ -15,6 +18,7 @@ input {
 }
 body {
   margin: 0;
+  min-height: 100vh;
   background: url(https://i.pinimg.com/originals/b4/8e/6d/b48e6d6ada7017fa19bc2cd91b9085ed.jpg);
   background-size: cover;
   background-repeat: no-repeat;

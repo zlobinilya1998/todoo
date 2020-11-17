@@ -1,0 +1,11 @@
+.wrapper {
+  width: fit-content;
+  display: flex;
+}
+.link {
+  color: white;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  text-decoration: none !important;
+  transition: all ease 0.5s;
+}

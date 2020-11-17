@@ -1,5 +1,5 @@
 import { Button, Input } from "@material-ui/core";
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 
 import classes from "./tasker.module.css";
@@ -7,7 +7,6 @@ import classes from "./tasker.module.css";
 export default function Tasker({ onAddTask }) {
   const [text, SetText] = useState("");
 
-  useEffect(() => console.log(`Стейт ${text}`));
   const handleClick = (e) => {
     const value = e.currentTarget.value;
     SetText(value);

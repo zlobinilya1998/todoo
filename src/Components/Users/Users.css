@@ -1,6 +1,7 @@
 .users-blog {
-  max-width: 250px;
+  margin-top: 5rem;
   background: transparent;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  width: 100%;
 }
