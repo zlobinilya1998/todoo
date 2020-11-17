@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { App, Nav, Users } from "./ComponentsStore";
-import { navLinks, questions } from "./Store.js";
+import { navLinks, questions } from "./State.js";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import "./index.css";

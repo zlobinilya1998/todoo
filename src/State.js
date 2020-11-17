@@ -1,4 +1,5 @@
 export const navLinks = ["Board", "Tasks"];
+let state = {};
 export const questions = [
   {
     text: "Привести делать в порядок",

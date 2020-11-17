@@ -8,7 +8,7 @@ import {
   TooDooEmpty,
 } from "../../ComponentsStore";
 
-import classes from "./App.module.css";
+import s from "./App.module.css";
 
 function App({ questions }) {
   const [open, setOpen] = useState(false);
@@ -96,7 +96,7 @@ function App({ questions }) {
       {tasks === 0 ? (
         <p>Loading</p>
       ) : (
-        <div className={classes.tooDoo}>
+        <div className={s.tooDoo}>
           <Today />
           <Tasker onAddTask={onAddTask} />
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { User } from "../../ComponentsStore";
 
 import "./Users.css";
-
 export default function Users() {
   const [users, setUsers] = useState(0);
   const getUsers = async () => {
@@ -10,7 +9,6 @@ export default function Users() {
     const json = await responce.json();
     setUsers(json);
   };
-
   useEffect(() => {
     getUsers();
   }, []);
