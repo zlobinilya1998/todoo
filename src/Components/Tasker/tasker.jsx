@@ -21,7 +21,6 @@ export default function Tasker({ onAddTask }) {
       addTask();
     }
   };
-
   return (
     <>
       <div className={classes.inputField}>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { User } from "../../ComponentsStore";
+import { User } from "../Redux/ComponentsStore";
 
 import "./Users.css";
 export default function Users() {

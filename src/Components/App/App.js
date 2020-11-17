@@ -6,14 +6,14 @@ import {
   AlertWindow,
   Today,
   TooDooEmpty,
-} from "../../ComponentsStore";
+} from "../Redux/ComponentsStore";
 
 import s from "./App.module.css";
 
-function App({ questions }) {
+function App({ state }) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(["Ошибка"]);
-  const [tasks, setTasks] = useState(questions);
+  const [tasks, setTasks] = useState(state.questions);
 
   const taskOpen = (index) => {
     setTasks((prevTasks) =>
@@ -71,7 +71,6 @@ function App({ questions }) {
   const onAddTask = (text) => {
     if (text.length < 45 && text.length !== 0 && text.length > 5) {
       setTasks((prevTasks) => {
-        console.log(tasks);
         return [
           ...prevTasks,
           {
