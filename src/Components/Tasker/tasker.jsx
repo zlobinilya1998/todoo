@@ -3,10 +3,9 @@ import { React, useState } from "react";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 
 import classes from "./tasker.module.css";
-
-export default function Tasker({ onAddTask }) {
+export default function Tasker({ onAddTask, newPostText }) {
   const [text, SetText] = useState("");
-
+  console.log(newPostText);
   const handleClick = (e) => {
     const value = e.currentTarget.value;
     SetText(value);

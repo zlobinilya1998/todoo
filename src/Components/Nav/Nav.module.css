@@ -8,3 +8,7 @@
   text-decoration: none !important;
   transition: all ease 0.5s;
 }
+.link:hover {
+  color: aqua;
+  opacity: 0.7;
+}

@@ -7,7 +7,6 @@ import {
   Today,
   TooDooEmpty,
 } from "../Redux/ComponentsStore";
-
 import s from "./App.module.css";
 
 function App({ state }) {
@@ -97,7 +96,7 @@ function App({ state }) {
       ) : (
         <div className={s.tooDoo}>
           <Today />
-          <Tasker onAddTask={onAddTask} />
+          <Tasker onAddTask={onAddTask} newPostText={state.newPostText} />
 
           {tasks.map((task, index) => (
             <Task

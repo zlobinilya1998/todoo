@@ -15,8 +15,8 @@
   opacity: 0.9;
 }
 
-.user-card:nth-child(2n + 1) {
-  border: 2px #5ff3d3 solid;
+.user-card:nth-child(2n) {
+  border: 0.5rem #5ff3d3 solid;
 }
 .user-realName {
   margin: 10px auto;

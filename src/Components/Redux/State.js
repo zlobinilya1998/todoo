@@ -1,3 +1,4 @@
+import { rerenderTree } from "./Render";
 export const state = {
   Navigation: { navLinks: ["Board", "Tasks"] },
   App: {
@@ -27,5 +28,17 @@ export const state = {
         taskOpen: true,
       },
     ],
+    newPostText: "react text",
   },
+};
+
+export const addTask = (text) => {
+  let newObj = {
+    text: text,
+    completed: false,
+    deleted: false,
+    taskOpen: true,
+  };
+  state.App.questions.push(newObj);
+  rerenderTree(state);
 };
