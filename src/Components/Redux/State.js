@@ -1,6 +1,5 @@
-import { rerenderTree } from "./Render";
+import { rerenderTree } from "../../index";
 export const state = {
-  Navigation: { navLinks: ["Board", "Tasks"] },
   App: {
     questions: [
       {
@@ -28,7 +27,6 @@ export const state = {
         taskOpen: true,
       },
     ],
-    newPostText: "react text",
   },
 };
 

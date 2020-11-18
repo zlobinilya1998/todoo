@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom";
 
 import s from "./Nav.module.css";
 
-export default function Nav({ links }) {
+export default function Nav() {
+  const links = ["Board", "Tasks"];
   return (
     <>
       <div className={s.wrapper}>

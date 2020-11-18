@@ -5,7 +5,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 .active {
-  color: rgb(66, 255, 230);
+  color: rgb(66, 255, 230) !important;
 }
 p {
   line-height: 2.5rem;

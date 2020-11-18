@@ -1,5 +1,6 @@
 .user-card {
   max-width: 100%;
+  min-width: 250px;
   border: 2px #54c1f7 solid;
   display: flex;
   flex-direction: column;
@@ -9,21 +10,27 @@
   position: relative;
   transition: all 0.7s ease-out;
   cursor: pointer;
+  opacity: 0.7;
 }
-.user-card:hover {
+.user-card:nth-child(2n) {
+  border: 0.2rem #5ff3d3 solid;
+}
+.user-card:nth-child(-n + 5):hover {
   transform: translate(0, -2rem);
-  opacity: 0.9;
+  opacity: 1;
+  border: 0.2rem #3cff00 solid;
+}
+.user-card:nth-child(n + 6):hover {
+  transform: translate(0, +2rem);
+  opacity: 1;
+  border: 0.2rem #31f300 solid;
+}
+.user-card:nth-child(n + 6):hover > h2 {
+  color: rgb(255, 74, 68);
 }
 
-.user-card:nth-child(2n) {
-  border: 0.5rem #5ff3d3 solid;
-}
 .user-realName {
   margin: 10px auto;
   font-size: medium;
   text-align: center;
-}
-.user-realName:nth-child(n3 + 1) .user-name span {
-  color: rgb(122, 121, 121);
-  text-shadow: -1px -1px 7px rgba(150, 150, 150, 1);
 }
