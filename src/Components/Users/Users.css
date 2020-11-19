@@ -6,4 +6,5 @@
   flex-direction: row;
   width: 100%;
   justify-content: center;
+  transition: all ease-in 2s;
 }

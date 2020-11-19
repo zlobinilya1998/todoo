@@ -12,6 +12,7 @@ export let rerenderTree = () => {
     <React.StrictMode>
       <>
         <BrowserRouter>
+          <App state={state.App} />
           <Nav />
           <Route path="/Board" render={() => <Users />} />
           <Route path="/Tasks" render={() => <App state={state.App} />} />
