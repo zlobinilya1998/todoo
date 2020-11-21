@@ -7,8 +7,8 @@ export default function Nav() {
   return (
     <>
       <div className={s.wrapper}>
-        {links.map((button) => (
-          <NavLink className={s.link} to={`/${button}`}>
+        {links.map((button, index) => (
+          <NavLink key={index} className={s.link} to={`/${button}`}>
             {button}
           </NavLink>
         ))}

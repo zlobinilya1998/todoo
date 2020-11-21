@@ -1,25 +1,34 @@
-import "./index.css";
-
 import React from "react";
 import ReactDOM from "react-dom";
-import { App, Nav, Users } from "./Components/Redux/ComponentsStore";
-import { state } from "./Components/Redux/State";
 
+import { App, Nav, Users } from "./Components/Redux/ComponentsStore";
+import { store } from "./Components/Redux/Store";
 import { BrowserRouter, Route } from "react-router-dom";
+
+import "./index.css";
 
 export let rerenderTree = () => {
   ReactDOM.render(
     <React.StrictMode>
       <>
         <BrowserRouter>
-          <App state={state.App} />
           <Nav />
           <Route path="/Board" render={() => <Users />} />
-          <Route path="/Tasks" render={() => <App state={state.App} />} />
+          <Route
+            path="/Tasks"
+            render={() => (
+              <App
+                state={store._state.App}
+                dispatch={store.dispatch.bind(store)}
+              />
+            )}
+          />
         </BrowserRouter>
       </>
     </React.StrictMode>,
     document.getElementById("root")
   );
 };
-rerenderTree(state);
+rerenderTree(store.getState());
+
+store.subscribe(rerenderTree);
