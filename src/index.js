@@ -9,23 +9,21 @@ import "./index.css";
 
 export let rerenderTree = () => {
   ReactDOM.render(
-    <React.StrictMode>
-      <>
-        <BrowserRouter>
-          <Nav />
-          <Route path="/Board" render={() => <Users />} />
-          <Route
-            path="/Tasks"
-            render={() => (
-              <App
-                state={store._state.App}
-                dispatch={store.dispatch.bind(store)}
-              />
-            )}
-          />
-        </BrowserRouter>
-      </>
-    </React.StrictMode>,
+    <>
+      <BrowserRouter>
+        <Nav />
+        <Route path="/Board" render={() => <Users />} />
+        <Route
+          path="/Tasks"
+          render={() => (
+            <App
+              state={store._state.App}
+              dispatch={store.dispatch.bind(store)}
+            />
+          )}
+        />
+      </BrowserRouter>
+    </>,
     document.getElementById("root")
   );
 };

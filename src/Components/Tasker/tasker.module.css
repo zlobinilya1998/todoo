@@ -9,7 +9,7 @@
   transition: all ease-out 0.3s;
 }
 .tooDooInput:focus {
-  outline: 0.1rem rgb(8, 248, 8) solid;
+  box-shadow: 0.5rem 0.2rem 1rem rgba(0, 0, 0, 0.75);
 }
 .tooDooInputButton {
   padding: 0px;
