@@ -17,7 +17,7 @@ export default function Tasker({ text, dispatch }) {
           ref={inputRef}
           value={text}
           className={classes.tooDooInput}
-          placeholder="Введите название новой задачи"
+          placeholder="Place for new task"
           onChange={() =>
             dispatch(inputTextActionCreator(inputRef.current.value))
           }
