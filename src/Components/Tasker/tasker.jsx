@@ -7,8 +7,11 @@ import classes from "./tasker.module.css";
 export default function Tasker({ text, dispatch }) {
   const inputRef = useRef();
 
-  const addTaskActionCreator = (text) => ({ type: "ADD-TASK", text: text });
-  const inputTextActionCreator = (text) => ({ type: "INPUT-TEXT", text: text });
+  const addTaskActionCreator = (text) => ({ type: "ADD-TASK", payload: text });
+  const inputTextActionCreator = (text) => ({
+    type: "INPUT-TEXT",
+    payload: text,
+  });
 
   return (
     <>
