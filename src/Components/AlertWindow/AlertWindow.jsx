@@ -3,7 +3,6 @@ import Collapse from "@material-ui/core/Collapse";
 import "./AlertWindow.css";
 
 export default function AlertWindow({ state, dispatch }) {
-  console.log(state);
   const closeAlertActionCreator = () => ({ type: "CLOSE-ALERT" });
   return (
     <>

@@ -1,20 +1,23 @@
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-
+import {
+  toggleCompletedActionCreator,
+  toggleDeletedActionCreator,
+} from "../Redux/app-reducer";
+import { connect } from "react-redux";
 import classes from "../Task/Task.module.css";
 
-export default function Task({ text, completed, deleted, index, dispatch }) {
-  const toggleCompletedActionCreator = (index) => ({
-    type: "TOGGLE-COMPLETED",
-    index: index,
-  });
-  const toggleDeletedActionCreator = (index) => ({
-    type: "TOGGLE-DELETED",
-    index: index,
-  });
+function Task({
+  text,
+  completed,
+  index,
+  toggleCompleted,
+  toggleDeleted,
+  deleted,
+}) {
   return (
     <div className={classes.task} draggable="true">
       <p
-        onClick={() => dispatch(toggleCompletedActionCreator(index))}
+        onClick={() => toggleCompleted(index)}
         className={`${classes.tooDooTask} ${
           completed ? classes.completed : null
         } ${deleted ? classes.deleted : null}`}
@@ -24,10 +27,17 @@ export default function Task({ text, completed, deleted, index, dispatch }) {
       <div className={deleted ? classes.deleted : null}>
         <HighlightOffIcon
           className={classes.deleteIcon}
-          onClick={() => dispatch(toggleDeletedActionCreator(index))}
+          onClick={() => toggleDeleted(index)}
           variant="outlined"
         />
       </div>
     </div>
   );
 }
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  toggleCompleted: (index) => dispatch(toggleCompletedActionCreator(index)),
+  toggleDeleted: (index) => dispatch(toggleDeletedActionCreator(index)),
+});
+const ConnectedTask = connect(mapStateToProps, mapDispatchToProps)(Task);
+export default ConnectedTask;

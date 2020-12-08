@@ -1,49 +1,99 @@
 import { types } from "./types";
-import { rerenderTree } from "../../index";
 
-const appReducer = (state, action) => {
+const initialState = {
+  alert: {
+    open: false,
+    text: "Ошибка",
+  },
+  inputText: "",
+  questions: [
+    {
+      text: "Привести делать в порядок",
+      completed: false,
+      deleted: false,
+      taskOpen: true,
+    },
+    {
+      text: "Начать новую жизнь",
+      completed: false,
+      deleted: false,
+      taskOpen: true,
+    },
+    {
+      text: "Построить дом",
+      completed: false,
+      deleted: false,
+      taskOpen: true,
+    },
+    {
+      text: "Посмотреть метод",
+      completed: false,
+      deleted: false,
+      taskOpen: true,
+    },
+  ],
+};
+
+const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD_TASK:
-      const closeAlert = () => {
-        state.alert.open = false;
-        rerenderTree();
-      };
       if (
         action.payload.length < 45 &&
         action.payload.length !== 0 &&
         action.payload.length > 5
       ) {
         let newObj = {
-          payload: action.payload[0].toUpperCase() + action.payload.slice(1),
+          text: action.payload[0].toUpperCase() + action.payload.slice(1),
           completed: false,
           deleted: false,
           taskOpen: true,
         };
-        state.questions.push(newObj);
-        state.inputpayload = "";
+        return {
+          ...state,
+          questions: [...state.questions, newObj],
+          inputText: "",
+        };
       } else if (action.payload.length === 0) {
-        state.alert.payload[0] = "Строка не может быть пустой";
-        state.alert.open = true;
-        setTimeout(closeAlert, 2000);
+        return {
+          ...state,
+          alert: {
+            ...state.alert,
+            text: "Строка не может быть пустой",
+            open: true,
+          },
+        };
       } else if (action.payload.length > 45) {
-        state.alert.payload[0] = "Строка слишком длинная!";
-        state.alert.open = true;
-        setTimeout(closeAlert, 2000);
-      } else if (action.payload.length < 5) {
-        state.alert.payload[0] = "Строка слишком короткая!";
-        state.alert.open = true;
-        setTimeout(closeAlert, 2000);
+        return {
+          ...state,
+          alert: {
+            ...state.alert,
+            text: "Строка слишком длинная!",
+            open: true,
+          },
+        };
+      } else if (action.payload.length <= 5) {
+        return {
+          ...state,
+          alert: {
+            ...state.alert,
+            text: "Строка слишком короткая!",
+            open: true,
+          },
+        };
       }
-      return state;
-    case types.INPUT_payload:
-      state.inputpayload = action.payload;
-      return state;
+    // eslint-disable-next-line
+    case types.INPUT_TEXT:
+      return {
+        ...state,
+        inputText: (state.inputText = action.payload),
+      };
     case types.TOGGLE_COMPLETED:
       state.questions.map((task, curIdx) => {
         if (action.index === curIdx) {
-          state.questions[action.index].completed = !state.questions[
-            action.index
-          ].completed;
+          return {
+            ...task,
+            completed: true,
+          };
         }
         return task;
       });
@@ -51,8 +101,10 @@ const appReducer = (state, action) => {
     case types.TOGGLE_DELETED:
       state.questions.map((task, curIdx) => {
         if (action.index === curIdx) {
-          state.questions[action.index].deleted = !state.questions[action.index]
-            .deleted;
+          return {
+            ...task,
+            deleted: !state.questions[action.index].deleted,
+          };
         }
         return task;
       });
@@ -61,8 +113,25 @@ const appReducer = (state, action) => {
       state.alert.open = false;
       return state;
     default:
-      return state;
+      return { ...state };
   }
 };
 
 export default appReducer;
+
+export const addTaskActionCreator = (text) => ({
+  type: "ADD-TASK",
+  payload: text,
+});
+export const inputTextActionCreator = (text) => ({
+  type: "INPUT-TEXT",
+  payload: text,
+});
+export const toggleCompletedActionCreator = (index) => ({
+  type: "TOGGLE-COMPLETED",
+  index: index,
+});
+export const toggleDeletedActionCreator = (index) => ({
+  type: "TOGGLE-DELETED",
+  index: index,
+});

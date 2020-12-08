@@ -3,31 +3,28 @@ import { Button } from "@material-ui/core";
 import { React, useRef } from "react";
 
 import classes from "./tasker.module.css";
+import { connect } from "react-redux";
+import {
+  inputTextActionCreator,
+  addTaskActionCreator,
+} from "../Redux/app-reducer";
 
-export default function Tasker({ text, dispatch }) {
+function Tasker({ inputText, changeText, addTask }) {
   const inputRef = useRef();
-
-  const addTaskActionCreator = (text) => ({ type: "ADD-TASK", payload: text });
-  const inputTextActionCreator = (text) => ({
-    type: "INPUT-TEXT",
-    payload: text,
-  });
 
   return (
     <>
       <div className={classes.inputField}>
         <input
           ref={inputRef}
-          value={text}
+          value={inputText}
           className={classes.tooDooInput}
           placeholder="Place for new task"
-          onChange={() =>
-            dispatch(inputTextActionCreator(inputRef.current.value))
-          }
+          onChange={() => changeText(inputRef.current.value)}
         ></input>
         <Button
           className={classes.tooDooInputButton}
-          onClick={() => dispatch(addTaskActionCreator(text))}
+          onClick={() => addTask(inputText)}
         >
           <PostAddIcon>Добавить</PostAddIcon>
         </Button>
@@ -35,3 +32,21 @@ export default function Tasker({ text, dispatch }) {
     </>
   );
 }
+
+const mapStateToProps = (state) => ({
+  inputText: state.inputText,
+});
+const mapDispatchToProps = (dispatch) => ({
+  changeText: (text) => dispatch(inputTextActionCreator(text)),
+  addTask: (text) => dispatch(addTaskActionCreator(text)),
+});
+const mergeProps = (state, dispatch) => ({
+  ...state,
+  ...dispatch,
+});
+const ConnectedTasker = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(Tasker);
+export default ConnectedTasker;

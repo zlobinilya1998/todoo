@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import {
   Task,
   Tasker,
@@ -8,33 +9,39 @@ import {
 
 import s from "./App.module.css";
 
-function App({ state, dispatch }) {
+function App({ questions, inputText, alert }) {
   return (
     <>
-      {state.questions === 0 ? (
+      {questions === 0 ? (
         <p>Loading</p>
       ) : (
         <>
           <div className={s.tooDoo}>
             <Today />
-            <Tasker text={state.inputText} dispatch={dispatch} />
-            {state.questions.map((task, index) => (
+            <Tasker text={inputText} />
+            {questions.map((task, index) => (
               <Task
                 key={index}
                 index={index}
                 text={task.text}
                 completed={task.completed}
-                dispatch={dispatch}
+                deleted={task.deleted}
               />
             ))}
 
-            <TooDooEmpty tasks={state.questions} />
+            <TooDooEmpty tasks={questions} />
           </div>
         </>
       )}
-      <AlertWindow state={state.alert} dispatch={dispatch} />
+      <AlertWindow state={alert} />
     </>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  questions: state.questions,
+  inputText: state.inputText,
+  alert: state.alert,
+});
+const ConnectedApp = connect(mapStateToProps)(App);
+export default ConnectedApp;
