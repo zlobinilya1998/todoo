@@ -89,49 +89,55 @@ const appReducer = (state = initialState, action) => {
       };
     case types.TOGGLE_COMPLETED:
       state.questions.map((task, curIdx) => {
-        if (action.index === curIdx) {
+        if (action.payload === curIdx) {
           return {
-            ...task,
-            completed: true,
+            ...state,
+            questions: [...state.questions, { ...task, completed: true }],
           };
         }
-        return task;
+        return state;
       });
       return state;
     case types.TOGGLE_DELETED:
       state.questions.map((task, curIdx) => {
-        if (action.index === curIdx) {
+        if (action.payload === curIdx) {
           return {
-            ...task,
-            deleted: !state.questions[action.index].deleted,
+            ...state,
+            questions: [
+              ...state.questions,
+              (state.questions[action.payload].deleted = true),
+            ],
           };
         }
         return task;
       });
       return state;
     case types.CLOSE_ALERT:
-      state.alert.open = false;
-      return state;
+      return {
+        ...state,
+        alert: { ...state.alert, open: false },
+      };
     default:
-      return { ...state };
+      return state;
   }
 };
 
 export default appReducer;
 
 export const addTaskActionCreator = (text) => ({
-  type: "ADD-TASK",
+  type: types.ADD_TASK,
   payload: text,
 });
 export const inputTextActionCreator = (text) => ({
-  type: "INPUT-TEXT",
+  type: types.INPUT_TEXT,
   payload: text,
 });
 export const toggleCompletedActionCreator = (index) => ({
-  type: "TOGGLE-COMPLETED",
-  index: index,
+  type: types.TOGGLE_COMPLETED,
+  payload: index,
 });
 export const toggleDeletedActionCreator = (index) => ({
-  type: "TOGGLE-DELETED",
-  index: index,
+  type: types.TOGGLE_DELETED,
+  payload: index,
 });
+export const closeAlertActionCreator = () => ({ type: types.CLOSE_ALERT });

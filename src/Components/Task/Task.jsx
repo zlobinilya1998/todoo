@@ -13,9 +13,10 @@ function Task({
   toggleCompleted,
   toggleDeleted,
   deleted,
+  dispatch,
 }) {
   return (
-    <div className={classes.task} draggable="true">
+    <div className={classes.task}>
       <p
         onClick={() => toggleCompleted(index)}
         className={`${classes.tooDooTask} ${
@@ -27,17 +28,16 @@ function Task({
       <div className={deleted ? classes.deleted : null}>
         <HighlightOffIcon
           className={classes.deleteIcon}
-          onClick={() => toggleDeleted(index)}
+          onClick={() => dispatch(toggleDeletedActionCreator(index))}
           variant="outlined"
         />
       </div>
     </div>
   );
 }
-const mapStateToProps = (state) => ({});
+
 const mapDispatchToProps = (dispatch) => ({
-  toggleCompleted: (index) => dispatch(toggleCompletedActionCreator(index)),
-  toggleDeleted: (index) => dispatch(toggleDeletedActionCreator(index)),
+  dispatch: dispatch,
 });
-const ConnectedTask = connect(mapStateToProps, mapDispatchToProps)(Task);
+const ConnectedTask = connect(null, mapDispatchToProps)(Task);
 export default ConnectedTask;

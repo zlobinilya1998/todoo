@@ -1,11 +1,19 @@
+import { connect } from "react-redux";
 import "./TooDooEmpty.css";
 
-export default function TooDooEmpty({ tasks }) {
+function TooDooEmpty({ questions }) {
   return (
     <div>
-      {tasks.length === 0 ? (
+      {questions.length === 0 ? (
         <p className="tooDoo-empty">Ваш список задач пуст!</p>
       ) : null}
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  questions: state.questions,
+});
+const ConnectedTooDooEmpty = connect(mapStateToProps)(TooDooEmpty);
+
+export default ConnectedTooDooEmpty;

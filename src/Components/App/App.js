@@ -29,7 +29,7 @@ function App({ questions, inputText, alert }) {
               />
             ))}
 
-            <TooDooEmpty tasks={questions} />
+            <TooDooEmpty />
           </div>
         </>
       )}
