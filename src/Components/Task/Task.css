@@ -4,24 +4,26 @@
   transition: all 0.5s;
   cursor: pointer;
 }
-.completed {
-  text-decoration: line-through;
-  transition: all 1s;
-  color: green;
-}
 .task {
   margin-bottom: 0.5rem;
   display: flex;
   justify-content: space-between;
 }
+.completed {
+  text-decoration: line-through;
+  color: green;
+}
+
 .deleted {
-  opacity: 0;
-  animation: move 1s linear;
+  animation: move 1s ease-out;
 }
 .deleteIcon:hover {
   color: red;
-  animation: rotate linear infinite 4s;
 }
+.deleteIcon.deleted {
+  display: none;
+}
+
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -34,9 +36,11 @@
 @keyframes move {
   from {
     transform: translateX(0);
+    opacity: 1;
   }
   to {
     transform: translateX(50px);
+    opacity: 0;
     color: red;
   }
 }

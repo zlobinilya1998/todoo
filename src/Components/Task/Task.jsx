@@ -1,29 +1,32 @@
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import {
   toggleCompletedActionCreator,
   toggleDeletedActionCreator,
+  deleteTaskActionCreator,
 } from "../Redux/app-reducer";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { connect } from "react-redux";
-import classes from "../Task/Task.module.css";
 
-function Task({ text, completed, index, deleted, dispatch }) {
+import "../Task/Task.css";
+
+function Task({ text, completed, index, dispatch, deleted }) {
   return (
-    <div className={classes.task}>
+    <div className="task">
       <p
         onClick={() => dispatch(toggleCompletedActionCreator(index))}
-        className={`${classes.tooDooTask} ${
-          completed ? classes.completed : null
-        } ${deleted ? classes.deleted : null}`}
+        className={`tooDooTask ${deleted ? "deleted" : ""} ${
+          completed ? "completed" : ""
+        }`}
       >
         #{index + 1} {text}
       </p>
-      <div className={deleted ? classes.deleted : null}>
-        <HighlightOffIcon
-          className={classes.deleteIcon}
-          onClick={() => dispatch(toggleDeletedActionCreator(index))}
-          variant="outlined"
-        />
-      </div>
+      <HighlightOffIcon
+        className={`deleteIcon ${deleted ? "deleted" : ""}`}
+        onClick={() => {
+          dispatch(toggleDeletedActionCreator(index));
+          setTimeout(() => dispatch(deleteTaskActionCreator(index)), 700);
+        }}
+        variant="outlined"
+      />
     </div>
   );
 }

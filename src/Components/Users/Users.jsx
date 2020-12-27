@@ -14,7 +14,7 @@ export default function Users() {
   }, []);
 
   if (users === 0) {
-    return <h2>Loading</h2>;
+    return <div className="water"></div>;
   } else
     return (
       <div className="users-blog">

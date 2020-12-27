@@ -72,22 +72,15 @@ const appReducer = (state = initialState, action) => {
         stateCopy.alert.text = "Строка слишком короткая!";
         stateCopy.alert.open = true;
         return stateCopy;
-      }
-    // eslint-disable-next-line
+      } else return stateCopy;
+    case types.DELETE_TASK:
+      stateCopy.questions = stateCopy.questions.filter(
+        (elem, index) => index !== action.payload
+      );
+      return stateCopy;
     case types.INPUT_TEXT:
       stateCopy.inputText = action.payload;
       return stateCopy;
-    // case types.TOGGLE_COMPLETED:
-    //   stateCopy.questions.map((task, curIdx) => {
-    //     if (action.payload === curIdx) {
-    //       return {
-    //         ...state,
-    //         questions: [...state.questions, { ...task, completed: true }],
-    //       };
-    //     }
-    //     return state;
-    //   });
-    //   return state;
     case types.TOGGLE_COMPLETED:
       stateCopy.questions[action.payload] = {
         ...stateCopy.questions[action.payload],
@@ -101,17 +94,19 @@ const appReducer = (state = initialState, action) => {
       };
       return stateCopy;
     case types.CLOSE_ALERT:
-      return {
-        ...state,
-        alert: { ...state.alert, open: false },
-      };
+      stateCopy.alert.open = false;
+      return stateCopy;
     default:
-      return state;
+      return stateCopy;
   }
 };
 
 export default appReducer;
 
+export const deleteTaskActionCreator = (index) => ({
+  type: types.DELETE_TASK,
+  payload: index,
+});
 export const addTaskActionCreator = (text) => ({
   type: types.ADD_TASK,
   payload: text,
