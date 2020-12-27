@@ -18,8 +18,9 @@ export default function Users() {
   } else
     return (
       <div className="users-blog">
-        {users.map((user) => (
+        {users.map((user, index) => (
           <User
+            key={index}
             id={user.id}
             realName={user.name}
             name={user.username}
