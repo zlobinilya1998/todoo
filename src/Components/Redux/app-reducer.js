@@ -35,6 +35,15 @@ const initialState = {
 };
 
 const appReducer = (state = initialState, action) => {
+  let stateCopy = {
+    ...state,
+    alert: { ...state.alert },
+    questions: [...state.questions],
+  };
+  stateCopy.questions = stateCopy.questions.map(
+    (elem, index) => (elem = { ...state.questions[index] })
+  );
+
   switch (action.type) {
     case types.ADD_TASK:
       if (
@@ -48,70 +57,49 @@ const appReducer = (state = initialState, action) => {
           deleted: false,
           taskOpen: true,
         };
-        return {
-          ...state,
-          questions: [...state.questions, newObj],
-          inputText: "",
-        };
+        stateCopy.questions.push(newObj);
+        stateCopy.inputText = "";
+        return stateCopy;
       } else if (action.payload.length === 0) {
-        return {
-          ...state,
-          alert: {
-            ...state.alert,
-            text: "Строка не может быть пустой",
-            open: true,
-          },
-        };
+        stateCopy.alert.text = "Строка не может быть пустой";
+        stateCopy.alert.open = true;
+        return stateCopy;
       } else if (action.payload.length > 45) {
-        return {
-          ...state,
-          alert: {
-            ...state.alert,
-            text: "Строка слишком длинная!",
-            open: true,
-          },
-        };
+        stateCopy.alert.text = "Строка слишком длинная!";
+        stateCopy.alert.open = true;
+        return stateCopy;
       } else if (action.payload.length <= 5) {
-        return {
-          ...state,
-          alert: {
-            ...state.alert,
-            text: "Строка слишком короткая!",
-            open: true,
-          },
-        };
+        stateCopy.alert.text = "Строка слишком короткая!";
+        stateCopy.alert.open = true;
+        return stateCopy;
       }
     // eslint-disable-next-line
     case types.INPUT_TEXT:
-      return {
-        ...state,
-        inputText: (state.inputText = action.payload),
-      };
+      stateCopy.inputText = action.payload;
+      return stateCopy;
+    // case types.TOGGLE_COMPLETED:
+    //   stateCopy.questions.map((task, curIdx) => {
+    //     if (action.payload === curIdx) {
+    //       return {
+    //         ...state,
+    //         questions: [...state.questions, { ...task, completed: true }],
+    //       };
+    //     }
+    //     return state;
+    //   });
+    //   return state;
     case types.TOGGLE_COMPLETED:
-      state.questions.map((task, curIdx) => {
-        if (action.payload === curIdx) {
-          return {
-            ...state,
-            questions: [...state.questions, { ...task, completed: true }],
-          };
-        }
-        return state;
-      });
-      return state;
+      stateCopy.questions[action.payload] = {
+        ...stateCopy.questions[action.payload],
+        completed: !stateCopy.questions[action.payload].completed,
+      };
+      return stateCopy;
     case types.TOGGLE_DELETED:
-      state.questions.map((task, curIdx) => {
-        if (action.payload === curIdx) {
-          return {
-            ...state,
-            questions: [
-              ...state.questions,
-              (state.questions[action.payload].deleted = true),
-            ],
-          };
-        }
-        return task;
-      });
-      return state;
+      stateCopy.questions[action.payload] = {
+        ...stateCopy.questions[action.payload],
+        deleted: !stateCopy.questions[action.payload].deleted,
+      };
+      return stateCopy;
     case types.CLOSE_ALERT:
       return {
         ...state,

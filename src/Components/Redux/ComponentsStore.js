@@ -7,3 +7,4 @@ export { default as TooDooEmpty } from "../Today/TooDooEmpty/TooDooEmpty";
 export { default as Users } from "../Users/Users";
 export { default as User } from "../Users/User/User";
 export { default as App } from "../App/App";
+export { default as Animation } from "../Animation/Animation";

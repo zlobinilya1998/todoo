@@ -6,19 +6,11 @@ import {
 import { connect } from "react-redux";
 import classes from "../Task/Task.module.css";
 
-function Task({
-  text,
-  completed,
-  index,
-  toggleCompleted,
-  toggleDeleted,
-  deleted,
-  dispatch,
-}) {
+function Task({ text, completed, index, deleted, dispatch }) {
   return (
     <div className={classes.task}>
       <p
-        onClick={() => toggleCompleted(index)}
+        onClick={() => dispatch(toggleCompletedActionCreator(index))}
         className={`${classes.tooDooTask} ${
           completed ? classes.completed : null
         } ${deleted ? classes.deleted : null}`}
